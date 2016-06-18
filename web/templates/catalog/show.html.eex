@@ -1,0 +1,22 @@
+<h2>Show catalog</h2>
+
+<div>
+  <strong>Name:</strong>
+  <%= @catalog.name %>
+</div>
+
+<div>
+  <strong>Sections (<%= length(@sections) %>):</strong>
+  <ul>
+    <%= for section <- @sections do %>
+      <li><%= section.name %></li>
+    <% end %>
+    <li><%= link "New section",
+            to: section_path(@conn,
+                             :new,
+                             catalog_id: @catalog.id) %></li>
+  </ul>
+</div>
+
+<%= link "Edit", to: catalog_path(@conn, :edit, @catalog) %>
+<%= link "Back", to: catalog_path(@conn, :index) %>

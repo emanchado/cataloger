@@ -1,0 +1,6 @@
+<h2>Edit section</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: section_path(@conn, :update, @section) %>
+
+<%= link "Back", to: section_path(@conn, :index) %>

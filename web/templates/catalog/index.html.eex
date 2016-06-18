@@ -1,0 +1,26 @@
+<h2>Listing catalogs</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for catalog <- @catalogs do %>
+    <tr>
+      <td><%= catalog.name %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: catalog_path(@conn, :show, catalog), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: catalog_path(@conn, :edit, catalog), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: catalog_path(@conn, :delete, catalog), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New catalog", to: catalog_path(@conn, :new) %>

@@ -1,0 +1,30 @@
+<h2>Listing sections</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Cover image path</th>
+      <th>Catalog</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for section <- @sections do %>
+    <tr>
+      <td><%= section.name %></td>
+      <td><%= section.cover_image_path %></td>
+      <td><%= section.catalog_id %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: section_path(@conn, :show, section), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: section_path(@conn, :edit, section), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: section_path(@conn, :delete, section), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New section", to: section_path(@conn, :new) %>
