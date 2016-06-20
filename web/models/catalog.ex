@@ -3,6 +3,7 @@ defmodule Cataloger.Catalog do
 
   schema "catalogs" do
     field :name, :string
+    has_many :sections, Cataloger.Section
 
     timestamps
   end

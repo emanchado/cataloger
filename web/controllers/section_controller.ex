@@ -29,7 +29,7 @@ defmodule Cataloger.SectionController do
   end
 
   def show(conn, %{"id" => id}) do
-    section = Repo.get!(Section, id)
+    section = Section |> Repo.get!(id) |> Repo.preload([:catalog])
     render(conn, "show.html", section: section)
   end
 
@@ -40,8 +40,30 @@ defmodule Cataloger.SectionController do
   end
 
   def update(conn, %{"id" => id, "section" => section_params}) do
+    extra_cover_image =
+      case section_params["cover_image"] do
+        nil ->
+          %{}
+        _ ->
+          temp_path = section_params["cover_image"].path
+
+          original_filename = section_params["cover_image"].filename
+          original_extension = String.replace(original_filename, ~r/.*\./, "")
+          base_image_path = Application.get_env(:cataloger, :store)[:images]
+          final_path = Path.join(base_image_path,
+                                 "section-" <> id <> "." <> original_extension)
+
+          case File.rename(temp_path, final_path) do
+            :ok ->
+              %{"cover_image_path" => Path.basename(final_path)}
+            {:error, _reason} ->
+              %{}
+          end
+      end
+
     section = Repo.get!(Section, id)
-    changeset = Section.changeset(section, section_params)
+    changeset = Section.changeset(section,
+                                  Map.merge(section_params, extra_cover_image))
 
     case Repo.update(changeset) do
       {:ok, section} ->

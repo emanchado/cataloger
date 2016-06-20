@@ -8,16 +8,11 @@
   </li>
 
   <li>
-    <strong>Cover image path:</strong>
-    <%= @section.cover_image_path %>
-  </li>
-
-  <li>
-    <strong>Catalog:</strong>
-    <%= @section.catalog_id %>
+    <strong>Description:</strong>
+    <%= @section.description %>
   </li>
 
 </ul>
 
 <%= link "Edit", to: section_path(@conn, :edit, @section) %>
-<%= link "Back", to: section_path(@conn, :index) %>
+<%= link "Back", to: catalog_path(@conn, :show, @section.catalog) %>

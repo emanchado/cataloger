@@ -6,7 +6,7 @@
 
 /* Space out content a bit */
 body, form, ul, table {
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 20px;
 }
 
@@ -22,13 +22,8 @@ form.link, form.button {
 .header {
   border-bottom: 1px solid #e5e5e5;
 }
-.logo {
-  width: 60px;
-  height: 64px;
-  display: inline-block;
-  margin-bottom: 1em;
-  background-image: url("/images/lyre.png");
-  background-size: 60px 64px;
+.title {
+  font-size: 36px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -75,4 +70,13 @@ form.link, form.button {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+ul.section-list li {
+    display: inline-block;
+}
+
+ul.section-list li img {
+    max-width: 100px;
+    max-height: 100px;
 }

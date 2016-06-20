@@ -10,6 +10,8 @@ defmodule Cataloger.Endpoint do
   plug Plug.Static,
     at: "/", from: :cataloger, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
+  plug Plug.Static,
+    at: "/images", from: Application.get_env(:cataloger, :store)[:images], gzip: false
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

@@ -1,22 +1,18 @@
-<h2>Show catalog</h2>
+<ul class="section-list">
+  <%= for section <- @catalog.sections do %>
+    <li>
+      <a href="<%= section_path(@conn, :show, section) %>">
+        <img src="<%= static_path(@conn, "/images/" <> (section.cover_image_path || "default-section.png")) %>" /><%= section.name %>
+      </a>
+    </li>
+  <% end %>
+</ul>
 
-<div>
-  <strong>Name:</strong>
-  <%= @catalog.name %>
-</div>
-
-<div>
-  <strong>Sections (<%= length(@sections) %>):</strong>
-  <ul>
-    <%= for section <- @sections do %>
-      <li><%= section.name %></li>
-    <% end %>
-    <li><%= link "New section",
-            to: section_path(@conn,
-                             :new,
-                             catalog_id: @catalog.id) %></li>
-  </ul>
-</div>
-
+<%= link "New section",
+    to: section_path(@conn,
+                     :new,
+                     catalog_id: @catalog.id) %>
+/
 <%= link "Edit", to: catalog_path(@conn, :edit, @catalog) %>
+/
 <%= link "Back", to: catalog_path(@conn, :index) %>

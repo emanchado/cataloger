@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Cataloger!</title>
+    <title>Cataloger - <%= assigns[:page_title] || "Home" %></title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
@@ -19,7 +19,9 @@
             <li><a href="<%= static_path(@conn, "/") %>">Home</a></li>
           </ul>
         </nav>
-        <span class="logo"></span>
+        <span class="title">
+          <%= if assigns[:page_title], do: assigns[:page_title], else: "Cataloger" %>
+        </span>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

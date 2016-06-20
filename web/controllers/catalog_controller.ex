@@ -2,7 +2,6 @@ defmodule Cataloger.CatalogController do
   use Cataloger.Web, :controller
 
   alias Cataloger.Catalog
-  alias Cataloger.Section
 
   plug :scrub_params, "catalog" when action in [:create, :update]
 
@@ -30,9 +29,8 @@ defmodule Cataloger.CatalogController do
   end
 
   def show(conn, %{"id" => id}) do
-    catalog = Repo.get!(Catalog, id)
-    sections = Repo.all(from s in Section, where: s.catalog_id == ^id)
-    render(conn, "show.html", catalog: catalog, sections: sections)
+    catalog = Catalog |> Repo.get!(id) |> Repo.preload([:sections])
+    render(conn, "show.html", catalog: catalog, page_title: catalog.name)
   end
 
   def edit(conn, %{"id" => id}) do
