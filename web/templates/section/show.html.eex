@@ -1,18 +1,4 @@
-<h2>Show section</h2>
-
-<ul>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @section.name %>
-  </li>
-
-  <li>
-    <strong>Description:</strong>
-    <%= @section.description %>
-  </li>
-
-</ul>
+<%= @section.description %>
 
 <%= link "Edit", to: section_path(@conn, :edit, @section) %>
 <%= link "Back", to: catalog_path(@conn, :show, @section.catalog) %>
