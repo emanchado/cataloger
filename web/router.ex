@@ -22,6 +22,7 @@ defmodule Cataloger.Router do
     get "/preferences", PreferenceController, :index
     get "/preferences/edit", PreferenceController, :edit
     post "/preferences", PreferenceController, :update
+    resources "/items", ItemController
   end
 
   # Other scopes may use custom stacks.

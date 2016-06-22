@@ -1,0 +1,28 @@
+<h2>Show item</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @item.name %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @item.description %>
+  </li>
+
+  <li>
+    <strong>Cover image path:</strong>
+    <%= @item.cover_image_path %>
+  </li>
+
+  <li>
+    <strong>Section:</strong>
+    <%= @item.section_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: item_path(@conn, :edit, @item) %>
+<%= link "Back", to: item_path(@conn, :index) %>

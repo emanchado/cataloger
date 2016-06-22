@@ -1,4 +1,18 @@
 <%= @section.description %>
 
+<ul>
+  <%= for item <- @section.items do %>
+    <li>
+      <%= item.name %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link "New item",
+    to: item_path(@conn,
+                  :new,
+                  item: %{section_id: @section.id}) %>
+/
 <%= link "Edit", to: section_path(@conn, :edit, @section) %>
+/
 <%= link "Back", to: catalog_path(@conn, :show, @section.catalog) %>

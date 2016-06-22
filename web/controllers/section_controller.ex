@@ -29,7 +29,7 @@ defmodule Cataloger.SectionController do
   end
 
   def show(conn, %{"id" => id}) do
-    section = Section |> Repo.get!(id) |> Repo.preload([:catalog])
+    section = Section |> Repo.get!(id) |> Repo.preload([:catalog, :items])
     render(conn, "show.html", section: section, page_title: "'#{section.name}' Section")
   end
 

@@ -1,18 +1,17 @@
-defmodule Cataloger.Section do
+defmodule Cataloger.Item do
   use Cataloger.Web, :model
 
-  schema "sections" do
+  schema "items" do
     field :name, :string
-    field :cover_image_path, :string
     field :description, :string
-    belongs_to :catalog, Cataloger.Catalog
-    has_many :items, Cataloger.Item
+    field :cover_image_path, :string
+    belongs_to :section, Cataloger.Section
 
     timestamps
   end
 
-  @required_fields ~w(name catalog_id)
-  @optional_fields ~w(cover_image_path description)
+  @required_fields ~w(name description section_id)
+  @optional_fields ~w(cover_image_path)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
