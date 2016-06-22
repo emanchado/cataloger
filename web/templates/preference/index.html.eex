@@ -1,0 +1,20 @@
+<h2>Preferences</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Value</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Thumbnail sizes</td>
+      <td><%= @thumbnail_sizes %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= link "Edit preferences", to: preference_path(@conn, :edit) %>

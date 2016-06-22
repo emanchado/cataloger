@@ -1,0 +1,11 @@
+<form action="<%= @action %>" method="post">
+  <div class="form-group">
+    <label for="thumbnail-sizes">Thumbnail sizes:</label>
+    <input type="text" class="form-control" id="thumbnail-sizes" name="thumbnail_sizes" value="<%= @thumbnail_sizes %>" />
+  </div>
+
+  <input name="_csrf_token" type="hidden" value="<%= get_csrf_token %>">
+  <div class="form-group">
+    <%= submit "Save", class: "btn btn-primary" %>
+  </div>
+</form>

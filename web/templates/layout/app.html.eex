@@ -16,6 +16,7 @@
       <header class="header">
         <nav role="navigation">
           <ul class="nav nav-pills pull-right">
+            <li><a href="<%= preference_path(@conn, :index) %>">Preferences</a></li>
             <li><a href="<%= static_path(@conn, "/") %>">Home</a></li>
           </ul>
         </nav>

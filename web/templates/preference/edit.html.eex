@@ -1,0 +1,6 @@
+<h2>Edit preferences</h2>
+
+<%= render "form.html", thumbnail_sizes: @thumbnail_sizes,
+                        action: preference_path(@conn, :update) %>
+
+<%= link "Back", to: preference_path(@conn, :index) %>
