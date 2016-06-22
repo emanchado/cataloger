@@ -1,9 +1,12 @@
 <%= @section.description %>
 
-<ul>
+<ul class="item-list">
   <%= for item <- @section.items do %>
     <li>
-      <%= item.name %>
+      <a href="<%= item_path(@conn, :edit, item.id) %>">
+        <img src="<%= static_path(@conn, "/images/" <> (item.cover_image_path || "default-item.png")) %>" />
+        <%= item.name %>
+      </a>
     </li>
   <% end %>
 </ul>

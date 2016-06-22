@@ -47,9 +47,7 @@ defmodule Cataloger.ItemController do
 
     case Repo.update(changeset) do
       {:ok, item} ->
-        conn
-        |> put_flash(:info, "Item updated successfully.")
-        |> redirect(to: item_path(conn, :show, item))
+        redirect(conn, to: section_path(conn, :show, item.section_id))
       {:error, changeset} ->
         render(conn, "edit.html", item: item, changeset: changeset)
     end

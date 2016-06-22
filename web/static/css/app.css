@@ -80,3 +80,12 @@ ul.section-list li img {
     max-width: 100px;
     max-height: 100px;
 }
+
+ul.item-list li {
+    display: inline-block;
+}
+
+ul.item-list li img {
+    max-width: 100px;
+    max-height: 100px;
+}

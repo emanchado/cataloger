@@ -24,6 +24,12 @@
   </div>
 
   <div class="form-group">
+    <label class="control-label" for="item_tags">Tags (comma-separated)</label>
+    <%= text_input f, :tags, class: "form-control" %>
+    <%= error_tag f, :tags %>
+  </div>
+
+  <div class="form-group">
     <%= label f, :cover_image_path, class: "control-label" %>
     <%= file_input f, :cover_image_path, class: "form-control" %>
     <%= error_tag f, :cover_image_path %>
