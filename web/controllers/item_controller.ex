@@ -21,10 +21,25 @@ defmodule Cataloger.ItemController do
     changeset = Item.changeset(%Item{}, item_params)
 
     case Repo.insert(changeset) do
-      {:ok, _item} ->
-        conn
-        |> put_flash(:info, "Item created successfully.")
-        |> redirect(to: item_path(conn, :index))
+      {:ok, item} ->
+        case process_upload(item_params["cover_image"], "item-#{item.id}") do
+          nil ->
+            conn
+            |> put_flash(:info, "Item created successfully.")
+            |> redirect(to: section_path(conn, :show, item.section_id))
+          final_path ->
+            case Repo.update(Item.changeset(
+                      item,
+                      %{"id" => item.id, "cover_image_path" => final_path}
+                    )) do
+              {:ok, _item} ->
+                conn
+                |> put_flash(:info, "Item created successfully.")
+                |> redirect(to: section_path(conn, :show, item.section_id))
+              {:error, changeset} ->
+                render(conn, "new.html", changeset: changeset)
+            end
+        end
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -42,8 +57,16 @@ defmodule Cataloger.ItemController do
   end
 
   def update(conn, %{"id" => id, "item" => item_params}) do
+    extra_cover_image =
+      case process_upload(item_params["cover_image"], "item-#{id}") do
+        nil ->
+          %{}
+        final_path ->
+          %{"cover_image_path" => final_path}
+      end
+
     item = Repo.get!(Item, id)
-    changeset = Item.changeset(item, item_params)
+    changeset = Item.changeset(item, Map.merge(item_params, extra_cover_image))
 
     case Repo.update(changeset) do
       {:ok, item} ->
@@ -63,5 +86,25 @@ defmodule Cataloger.ItemController do
     conn
     |> put_flash(:info, "Item deleted successfully.")
     |> redirect(to: item_path(conn, :index))
+  end
+
+  defp process_upload(upload, base_filename) do
+      case upload do
+        nil ->
+          nil
+        _ ->
+          temp_path = upload.path
+
+          original_filename = upload.filename
+          original_extension = String.replace(original_filename, ~r/.*\./, "")
+          base_image_path = Application.get_env(:cataloger, :store)[:images]
+          final_path = Path.join(base_image_path,
+                                 base_filename <> "." <> original_extension)
+
+          case File.rename(temp_path, final_path) do
+            :ok -> Path.basename(final_path)
+            {:error, _reason} -> nil
+          end
+      end
   end
 end

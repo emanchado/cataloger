@@ -30,9 +30,9 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :cover_image_path, class: "control-label" %>
-    <%= file_input f, :cover_image_path, class: "form-control" %>
-    <%= error_tag f, :cover_image_path %>
+    <%= label f, :cover_image, class: "control-label" %>
+    <%= file_input f, :cover_image, class: "form-control" %>
+    <%= error_tag f, :cover_image %>
   </div>
 
   <div class="form-group">
