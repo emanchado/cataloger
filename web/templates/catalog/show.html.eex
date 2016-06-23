@@ -1,8 +1,13 @@
-<ul class="section-list">
+<ul class="entity-list section-list">
   <%= for section <- @catalog.sections do %>
     <li>
-      <a href="<%= section_path(@conn, :show, section) %>">
-        <img src="<%= static_path(@conn, "/images/" <> (section.cover_image_path || "default-section.png")) %>" /><%= section.name %>
+      <a href="<%= section_path(@conn, :show, section) %>" title="<%= section.description %>">
+        <div class="frame">
+          <img src="<%= static_path(@conn, "/images/" <> (section.cover_image_path || "default-section.png")) %>" />
+        </div>
+        <div class="caption">
+          <%= section.name %>
+        </div>
       </a>
     </li>
   <% end %>

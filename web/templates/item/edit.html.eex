@@ -1,4 +1,4 @@
-<h2>Edit item</h2>
+<h2>Edit item '<%= @item.name %>'</h2>
 
 <%= render "form.html", changeset: @changeset,
                         action: item_path(@conn, :update, @item) %>

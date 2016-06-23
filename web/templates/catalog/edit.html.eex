@@ -3,4 +3,4 @@
 <%= render "form.html", changeset: @changeset,
                         action: catalog_path(@conn, :update, @catalog) %>
 
-<%= link "Back", to: catalog_path(@conn, :index) %>
+<%= link "Back", to: catalog_path(@conn, :show, @catalog.id) %>

@@ -10,6 +10,10 @@ body, form, ul, table {
   margin-bottom: 20px;
 }
 
+h2 {
+    font-size: 24px;
+}
+
 /* Phoenix flash messages */
 .alert:empty { display: none; }
 
@@ -21,9 +25,10 @@ form.link, form.button {
 /* Custom page header */
 .header {
   border-bottom: 1px solid #e5e5e5;
+  height: 56px;
 }
 .title {
-  font-size: 36px;
+  font-size: 32px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -72,20 +77,65 @@ form.link, form.button {
   }
 }
 
+.big-description {
+    font-size: 16px;
+}
+
+ul.entity-list {
+    display: flex;
+
+    padding: 0;
+}
+
+ul.entity-list li {
+    display: flex;
+    float: left;
+    flex-direction: row;
+    justify-content: center;
+
+    width: 170px;
+    height: 220px;
+
+    border: 1px solid #aaa;
+    margin: 10px;
+    padding: 5px;
+
+    overflow: hidden;
+    text-align: center;
+}
+
+ul.entity-list li a:hover {
+    text-decoration: none;
+}
+
 ul.section-list li {
-    display: inline-block;
+    height: 200px;
 }
 
-ul.section-list li img {
-    max-width: 100px;
-    max-height: 100px;
+ul.entity-list .frame {
+    width: 160px;
+    height: 160px;
+
+    padding: 5px;
+    border: 1px solid #eee;
 }
 
-ul.item-list li {
-    display: inline-block;
+ul.entity-list .frame img {
+    max-width: 150px;
+    max-height: 150px;
 }
 
-ul.item-list li img {
-    max-width: 100px;
-    max-height: 100px;
+ul.entity-list li .caption {
+    text-align: left;
+    width: 100%;
+    margin-top: 5px;
+    padding: 0 2px;
+}
+
+ul.entity-list li .tags {
+    font-size: 70%;
+}
+
+ul.section-list li .caption {
+    text-align: center;
 }

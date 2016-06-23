@@ -1,15 +1,27 @@
-<%= @section.description %>
+<div class="big-description"><%= @section.description %></div>
 
-<ul class="item-list">
+<%= if @section.items == [] do %>
+<h2>No items in this section</h2>
+<% else %>
+
+<ul class="entity-list">
   <%= for item <- @section.items do %>
     <li>
       <a href="<%= item_path(@conn, :edit, item.id) %>">
-        <img src="<%= static_path(@conn, "/images/" <> (item.cover_image_path || "default-item.png")) %>" />
-        <%= item.name %>
+        <div class="frame">
+          <img src="<%= static_path(@conn, "/images/" <> (item.cover_image_path || "default-item.png")) %>" />
+        </div>
+        <div class="caption">
+          <%= item.name %>
+          <div class="tags" title="<%= item.tags %>">
+            <%= item.tags %>
+          </div>
+        </div>
       </a>
     </li>
   <% end %>
 </ul>
+<% end %>
 
 <%= link "New item",
     to: item_path(@conn,
