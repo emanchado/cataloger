@@ -1,0 +1,1 @@
+<p>See the catalog "<%= @catalog.name %>" exported in <tt><%= @exported_dir %></tt>.</p>

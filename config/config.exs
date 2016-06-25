@@ -15,7 +15,8 @@ config :cataloger, Cataloger.Endpoint,
            adapter: Phoenix.PubSub.PG2]
 
 config :cataloger,
-  store: [images: "./catalog_files/images"]
+  store: [images: "./catalog_files/images"],
+  export_dir: "./exported_catalogs"
 
 # Configures Elixir's Logger
 config :logger, :console,

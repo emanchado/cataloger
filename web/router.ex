@@ -18,6 +18,7 @@ defmodule Cataloger.Router do
 
     get "/", CatalogController, :index
     resources "/catalogs", CatalogController
+    get "/catalogs/export/:id", CatalogController, :export
     resources "/sections", SectionController
     get "/preferences", PreferenceController, :index
     get "/preferences/edit", PreferenceController, :edit
