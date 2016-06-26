@@ -2,7 +2,7 @@ defmodule Cataloger.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "rooms:*", Cataloger.RoomChannel
+  channel "catalog:*", Cataloger.CatalogChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

@@ -12,7 +12,7 @@ defmodule Thumbnailer do
 
     case errors do
       [] ->
-        {:ok, sizes}
+        :ok
       sizes ->
         {:error, sizes}
     end

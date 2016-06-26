@@ -3,6 +3,7 @@ defmodule Cataloger.CatalogController do
 
   alias Cataloger.Catalog
   alias Cataloger.Preference
+  alias Cataloger.Endpoint
 
   plug :scrub_params, "catalog" when action in [:create, :update]
 
@@ -70,36 +71,9 @@ defmodule Cataloger.CatalogController do
     catalog = Repo.get!(Catalog, id)
     base_export_dir = Application.get_env(:cataloger, :export_dir)
     catalog_export_dir = Path.join(base_export_dir, id)
-    image_export_dir = Path.join(catalog_export_dir, "images")
-    all_image_paths = Catalog.all_image_paths(catalog)
-    thumbnail_sizes = String.split(
-      Preference.get_preference(:thumbnail_sizes),
-      " "
-    )
 
-    errors = Enum.reduce(all_image_paths, [], fn(image, errors) ->
-      t = Task.async(Thumbnailer,
-                     :make_thumbnails,
-                     [image, image_export_dir, thumbnail_sizes])
-
-      case Task.await(t) do
-        {:ok, sizes} -> errors
-        {:error, e} -> [image | errors]
-      end
-    end)
-
-    case errors do
-      [] ->
-        render(conn, "export.html",
-               catalog: catalog,
-               exported_dir: catalog_export_dir)
-      error_list ->
-        render(conn, "error.html",
-               id: id,
-               message: "Error exporting catalog \"#{catalog.name}\".",
-               error: "Errors thumbnailing these images: " <>
-                 Enum.join(error_list, ", ")
-        )
-    end
+    render(conn, "export.html",
+           catalog: catalog,
+           exported_dir: catalog_export_dir)
   end
 end
