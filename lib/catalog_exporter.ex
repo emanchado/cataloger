@@ -1,8 +1,32 @@
-defmodule CatalogImageExporter do
+defmodule CatalogExporter do
   alias Cataloger.Repo
   alias Cataloger.Catalog
   alias Cataloger.Preference
   alias Cataloger.Endpoint
+
+  def export_structure(catalog_id) do
+    catalog = Repo.get!(Catalog, catalog_id) |> Repo.preload(:sections)
+    catalog_id_str = "#{catalog_id}"
+
+    section_structure = Enum.reduce(catalog.sections, [], fn(section, struct) ->
+      section = Repo.preload(section, :items)
+      items = Enum.reduce(section.items, [], fn(item, item_struct) ->
+        item_struct ++ [%{name: item.name,
+                          description: item.description,
+                          cover_image_path: item.cover_image_path,
+                          tags: String.split(item.tags, ", ")}]
+      end)
+
+      Endpoint.broadcast("catalog:" <> catalog_id_str,
+                         "structure-export-progress",
+                         %{current: section.name,
+                           number_sections: Enum.count(catalog.sections)})
+
+      struct ++ [%{name: section.name, items: items}]
+    end)
+
+    %{name: catalog.name, sections: section_structure}
+  end
 
   def export_images(catalog_id) do
     catalog = Repo.get!(Catalog, catalog_id)
@@ -23,7 +47,8 @@ defmodule CatalogImageExporter do
         :ok ->
           Endpoint.broadcast("catalog:" <> catalog_id_str,
                              "image-export-progress",
-                             %{current: image, all_images: all_image_paths})
+                             %{current: image,
+                               number_images: Enum.count(all_image_paths)})
           errors
         {:error, _e} ->
           [image | errors]

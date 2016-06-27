@@ -1,20 +1,9 @@
-<p id="progress-bar">Exporting images: <strong id="percentage-exported">0</strong>%</p>
-
-<p id="finish-message" style="display: none">See the catalog "<%= @catalog.name %>" exported in <tt><%= @exported_dir %></tt>.</p>
+<p id="progress-info">Exporting catalog <%= @catalog.name %>…</p>
 
 <script>
   window.addEventListener("load", function() {
-      var followExportProgress = require("web/static/js/catalog-export-progress").default;
-      var imageProgressEl = document.getElementById("percentage-exported");
-      var catalogId = <%= @catalog.id %>;
-
-      followExportProgress(catalogId, function(nProcessed, total) {
-          var percentageProcessed = Math.round((nProcessed / total) * 100);
-          imageProgressEl.innerText = percentageProcessed;
-          if (percentageProcessed === 100) {
-              document.getElementById("progress-bar").style.display = "none";
-              document.getElementById("finish-message").style.display = "";
-          }
-      });
+      var catalogExporter = require("web/static/js/catalog-exporter").default;
+      var progressInfoEl = document.getElementById("progress-info");
+      catalogExporter(<%= @catalog.id %>, progressInfoEl);
   }, false);
 </script>
