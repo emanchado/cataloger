@@ -20,6 +20,6 @@
 /
 <%= link "Edit", to: catalog_path(@conn, :edit, @catalog) %>
 /
-<%= link "Back", to: catalog_path(@conn, :index) %>
-/
 <%= link "Export", to: catalog_path(@conn, :export, @catalog.id) %>
+/
+<%= link "Back", to: catalog_path(@conn, :index) %>

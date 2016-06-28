@@ -39,11 +39,6 @@ form.link, form.button {
 }
 
 /* Customize container */
-@media (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-}
 .container-narrow > hr {
   margin: 30px 0;
 }
@@ -83,6 +78,7 @@ form.link, form.button {
 
 ul.entity-list {
     display: flex;
+    flex-wrap: wrap;
 
     padding: 0;
 }
@@ -137,5 +133,16 @@ ul.entity-list li .tags {
 }
 
 ul.section-list li .caption {
+    text-align: center;
+}
+
+.finished {
+    color: #aaa;
+}
+
+footer {
+    margin-top: 30px;
+    font-size: 10px;
+    font-style: italic;
     text-align: center;
 }

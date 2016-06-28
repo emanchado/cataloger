@@ -10,7 +10,7 @@ function followExportProgress(catalogId, structureProgCb, imageProgCb) {
         .receive("error", resp => { console.log("Unable to join", resp); });
 
     channel.on("structure-export-progress", payload => {
-        structureProgCb(++processedImages, payload.number_sections);
+        structureProgCb(++processedItems, payload.number_sections);
     });
 
     channel.on("image-export-progress", payload => {

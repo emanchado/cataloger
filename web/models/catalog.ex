@@ -31,12 +31,20 @@ defmodule Cataloger.Catalog do
     Enum.reduce(catalog.sections, [], fn(section, images) ->
       section = Repo.preload(section, :items)
 
-      section_image = Path.join(base_image_path, section.cover_image_path)
       item_images = Enum.reduce(section.items, [], fn(item, images) ->
-        [Path.join(base_image_path, item.cover_image_path) | images]
+        if item.cover_image_path do
+          [Path.join(base_image_path, item.cover_image_path) | images]
+        else
+          images
+        end
       end)
 
-      images ++ [section_image] ++ item_images
+      if section.cover_image_path do
+        section_image = Path.join(base_image_path, section.cover_image_path)
+        images ++ [section_image] ++ item_images
+      else
+        images ++ item_images
+      end
     end)
   end
 end

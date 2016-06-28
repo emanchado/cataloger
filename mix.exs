@@ -37,7 +37,8 @@ defmodule Cataloger.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
-     {:mogrify, "~> 0.3.1"}]
+     {:mogrify, "~> 0.3.1"},
+     {:json, "~> 0.3.0"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

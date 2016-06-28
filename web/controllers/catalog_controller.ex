@@ -2,8 +2,6 @@ defmodule Cataloger.CatalogController do
   use Cataloger.Web, :controller
 
   alias Cataloger.Catalog
-  alias Cataloger.Preference
-  alias Cataloger.Endpoint
 
   plug :scrub_params, "catalog" when action in [:create, :update]
 

@@ -25,7 +25,15 @@ defmodule CatalogExporter do
       struct ++ [%{name: section.name, items: items}]
     end)
 
-    %{name: catalog.name, sections: section_structure}
+    base_export_dir = Application.get_env(:cataloger, :export_dir)
+    catalog_export_dir = Path.join(base_export_dir, catalog_id_str)
+    json_path = Path.join(catalog_export_dir, "catalog.json")
+    whole_structure = %{name: catalog.name, sections: section_structure}
+    IO.puts System.cwd
+    case JSON.encode(whole_structure) do
+      {:ok, result} -> File.write!(json_path, result)
+      _ -> raise "Error encoding #{whole_structure}"
+    end
   end
 
   def export_images(catalog_id) do

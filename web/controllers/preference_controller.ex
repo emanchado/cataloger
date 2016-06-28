@@ -19,11 +19,11 @@ defmodule Cataloger.PreferenceController do
     changeset = Preference.changeset(preference, %{"value" => thumbnail_sizes})
 
     case Repo.insert_or_update(changeset) do
-      {:ok, preference} ->
+      {:ok, _preference} ->
         conn
         |> put_flash(:info, "Preference updated successfully.")
         |> redirect(to: preference_path(conn, :index))
-      {:error, changeset} ->
+      {:error, _changeset} ->
         render(conn, "edit.html", thumbnail_sizes: thumbnail_sizes)
     end
   end

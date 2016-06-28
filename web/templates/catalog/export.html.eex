@@ -1,4 +1,6 @@
-<p id="progress-info">Exporting catalog <%= @catalog.name %>…</p>
+<p id="progress-info"></p>
+
+<%= link "Back", to: catalog_path(@conn, :show, @catalog.id) %>
 
 <script>
   window.addEventListener("load", function() {

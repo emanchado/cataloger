@@ -1,21 +1,21 @@
 import followExportProgress from "web/static/js/catalog-export-progress";
 
 function updateProgress(progressInfoEl, structPercentage, imgPercentage) {
-    console.log("structPercentage =", structPercentage);
-    console.log("imgPercentage =", imgPercentage);
-    if (structPercentage >= 100 && imgPercentage >= 100) {
-        progressInfoEl.innerHTML = "Catalog exported.";
-        return;
-    }
-
     document.getElementById("structure-percentage").innerHTML =
         structPercentage + "%";
     document.getElementById("images-percentage").innerHTML =
         imgPercentage + "%";
+
+    if (structPercentage >= 100 && imgPercentage >= 100) {
+        progressInfoEl.firstChild.className = "finished";
+        const finalText = document.createTextNode("Catalog exported.");
+        progressInfoEl.appendChild(finalText);
+    }
 }
 
 function catalogExporter(catalogId, progressInfoEl) {
-    const structureProgressEl = document.createElement("div"),
+    const intermediateProgressEl = document.createElement("div"),
+          structureProgressEl = document.createElement("div"),
           imageProgressEl = document.createElement("div");
     structureProgressEl.id = "structure-progress";
     structureProgressEl.innerHTML =
@@ -23,8 +23,10 @@ function catalogExporter(catalogId, progressInfoEl) {
     imageProgressEl.id = "images-progress";
     imageProgressEl.innerHTML =
         "Exporting images: <span id='images-percentage'></span>";
-    progressInfoEl.appendChild(structureProgressEl);
-    progressInfoEl.appendChild(imageProgressEl);
+    intermediateProgressEl.appendChild(document.createTextNode("Exporting catalog…"));
+    intermediateProgressEl.appendChild(structureProgressEl);
+    intermediateProgressEl.appendChild(imageProgressEl);
+    progressInfoEl.appendChild(intermediateProgressEl);
 
     let structurePercentage = 0,
         imagesPercentage = 0;
