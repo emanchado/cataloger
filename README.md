@@ -27,9 +27,3 @@ reference example.
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
-
-## TODO
-
-* Copy the original cover image as part of the export
-* Specify the thumbnail sizes, both generally and for each image
-* Delete the export directory before starting

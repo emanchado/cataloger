@@ -5,8 +5,10 @@ function updateProgress(progressInfoEl, structPercentage, imgPercentage) {
         structPercentage + "%";
     document.getElementById("images-percentage").innerHTML =
         imgPercentage + "%";
+}
 
-    if (structPercentage >= 100 && imgPercentage >= 100) {
+function updateFinished(progressInfoEl, structureFinished, imagesFinished) {
+    if (structureFinished && imagesFinished) {
         progressInfoEl.firstChild.className = "finished";
         const finalText = document.createTextNode("Catalog exported.");
         progressInfoEl.appendChild(finalText);
@@ -29,15 +31,27 @@ function catalogExporter(catalogId, progressInfoEl) {
     progressInfoEl.appendChild(intermediateProgressEl);
 
     let structurePercentage = 0,
-        imagesPercentage = 0;
+        imagesPercentage = 0,
+        structureFinished = false,
+        imagesFinished = false;
 
     updateProgress(progressInfoEl, structurePercentage, imagesPercentage);
 
-    followExportProgress(catalogId, function(nProcessed, total) {
+    followExportProgress(catalogId, function(nProcessed, total, done) {
         structurePercentage = Math.round((nProcessed / total) * 100);
+        if (done) {
+            structurePercentage = 100;
+            structureFinished = true;
+            updateFinished(progressInfoEl, structureFinished, imagesFinished);
+        }
         updateProgress(progressInfoEl, structurePercentage, imagesPercentage);
-    }, function(nProcessed, total) {
+    }, function(nProcessed, total, done) {
         imagesPercentage = Math.round((nProcessed / total) * 100);
+        if (done) {
+            imagesPercentage = 100;
+            imagesFinished = true;
+            updateFinished(progressInfoEl, structureFinished, imagesFinished);
+        }
         updateProgress(progressInfoEl, structurePercentage, imagesPercentage);
     });
 }

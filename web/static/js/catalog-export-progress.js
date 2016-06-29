@@ -12,9 +12,15 @@ function followExportProgress(catalogId, structureProgCb, imageProgCb) {
     channel.on("structure-export-progress", payload => {
         structureProgCb(++processedItems, payload.number_sections);
     });
+    channel.on("structure-export-finished", payload => {
+        structureProgCb(processedItems, payload.number_sections, "done");
+    });
 
     channel.on("image-export-progress", payload => {
         imageProgCb(++processedImages, payload.number_images);
+    });
+    channel.on("image-export-finished", payload => {
+        imageProgCb(processedImages, payload.number_images, "done");
     });
 
     channel.push("start-structure-export", {id: catalogId});

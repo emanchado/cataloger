@@ -70,6 +70,9 @@ defmodule Cataloger.CatalogController do
     base_export_dir = Application.get_env(:cataloger, :export_dir)
     catalog_export_dir = Path.join(base_export_dir, id)
 
+    # Delete the export directory
+    File.rm_rf! catalog_export_dir
+
     render(conn, "export.html",
            catalog: catalog,
            exported_dir: catalog_export_dir)
