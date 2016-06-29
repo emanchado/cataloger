@@ -122,10 +122,11 @@ ul.entity-list .frame img {
 }
 
 ul.entity-list li .caption {
-    text-align: left;
-    width: 100%;
+    width: 160px;
     margin-top: 5px;
     padding: 0 2px;
+
+    text-align: left;
 }
 
 ul.entity-list li .tags {
@@ -133,7 +134,14 @@ ul.entity-list li .tags {
 }
 
 ul.section-list li .caption {
+    padding-left: 3px;
+    padding-right: 3px;
+
     text-align: center;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .finished {
