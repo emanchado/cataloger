@@ -14,7 +14,10 @@ defmodule Cataloger.ItemController do
   def new(conn, %{"item" => item_params}) do
     changeset = Item.changeset(%Item{}, item_params)
     section = Repo.get!(Section, item_params["section_id"])
-    render(conn, "new.html", changeset: changeset, page_title: "New item in '#{section.name}'")
+    render(conn, "new.html",
+           changeset: changeset,
+           page_title: "New item in '#{section.name}'",
+           section_id: item_params["section_id"])
   end
 
   def create(conn, %{"item" => item_params}) do

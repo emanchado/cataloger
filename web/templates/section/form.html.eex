@@ -5,16 +5,12 @@
     </div>
   <% end %>
 
+  <%= hidden_input f, :catalog_id, class: "form-control" %>
+
   <div class="form-group">
     <%= label f, :name, class: "control-label" %>
     <%= text_input f, :name, class: "form-control" %>
     <%= error_tag f, :name %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :catalog_id, class: "control-label" %>
-    <%= text_input f, :catalog_id, class: "form-control" %>
-    <%= error_tag f, :catalog_id %>
   </div>
 
   <div class="form-group">

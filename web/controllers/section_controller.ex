@@ -12,7 +12,9 @@ defmodule Cataloger.SectionController do
 
   def new(conn, params) do
     changeset = Section.changeset(%Section{}, params)
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html",
+           changeset: changeset,
+           catalog_id: params["catalog_id"])
   end
 
   def create(conn, %{"section" => section_params}) do
