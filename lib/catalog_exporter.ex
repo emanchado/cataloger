@@ -33,6 +33,7 @@ defmodule CatalogExporter do
                           description: item.description,
                           coverImage: image_info(item.cover_image_path,
                                                  thumbnail_sizes),
+                          url: item.url,
                           tags: String.split(item.tags, ", ")}]
       end)
 

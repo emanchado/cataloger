@@ -5,6 +5,7 @@ defmodule Cataloger.Item do
     field :name, :string
     field :description, :string
     field :cover_image_path, :string
+    field :url, :string
     field :tags, :string
     belongs_to :section, Cataloger.Section
 
@@ -12,7 +13,7 @@ defmodule Cataloger.Item do
   end
 
   @required_fields ~w(name description section_id)
-  @optional_fields ~w(cover_image_path tags)
+  @optional_fields ~w(cover_image_path url tags)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
