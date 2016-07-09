@@ -42,7 +42,10 @@ defmodule CatalogExporter do
                          %{current: section.name,
                            number_sections: Enum.count(catalog.sections)})
 
-      struct ++ [%{name: section.name, items: items}]
+      struct ++ [%{name: section.name,
+                   coverImage: image_info(section.cover_image_path,
+                                          thumbnail_sizes),
+                   items: items}]
     end)
 
     base_export_dir = Application.get_env(:cataloger, :export_dir)
