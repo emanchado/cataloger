@@ -29,7 +29,8 @@ defmodule CatalogExporter do
     section_structure = Enum.reduce(catalog.sections, [], fn(section, struct) ->
       section = Repo.preload(section, :items)
       items = Enum.reduce(section.items, [], fn(item, item_struct) ->
-        item_struct ++ [%{name: item.name,
+        item_struct ++ [%{id: item.id,
+                          name: item.name,
                           description: item.description,
                           coverImage: image_info(item.cover_image_path,
                                                  thumbnail_sizes),
@@ -42,7 +43,8 @@ defmodule CatalogExporter do
                          %{current: section.name,
                            number_sections: Enum.count(catalog.sections)})
 
-      struct ++ [%{name: section.name,
+      struct ++ [%{id: section.id,
+                   name: section.name,
                    coverImage: image_info(section.cover_image_path,
                                           thumbnail_sizes),
                    items: items}]
