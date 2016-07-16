@@ -45,6 +45,7 @@ defmodule CatalogExporter do
 
       struct ++ [%{id: section.id,
                    name: section.name,
+                   description: section.description,
                    coverImage: image_info(section.cover_image_path,
                                           thumbnail_sizes),
                    items: items}]
