@@ -14,8 +14,7 @@ images, including thumbnails in the specified sizes.
 
 Then, a front-end application can be written that reads the JSON file
 and shows the catalog without the need for a back-end. This second
-application is supposed to be custom, although I will soon write a
-reference example.
+application is supposed to be custom. See eg. https://github.com/emanchado/rpg-catalog.
 
 ## Running
 
