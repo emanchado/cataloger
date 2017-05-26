@@ -106,7 +106,10 @@ defmodule Cataloger.ItemController do
 
           case File.rename(temp_path, final_path) do
             :ok -> Path.basename(final_path)
-            {:error, _reason} -> nil
+            {:error, _reason} -> case File.copy(temp_path, final_path) do
+                                   {:ok, _bytes} -> Path.basename(final_path)
+                                   {:error, _reason} -> nil
+                                 end
           end
       end
   end
